@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text To Speech</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Vazirmatn", sans-serif;
+      }
+
+      body {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      .container {
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      .container h1 {
+        font-size: 34px;
+      }
+
+      textarea {
+        width: 350px;
+        height: 150px;
+        padding: 10px 30px;
+        resize: vertical;
+        border: 4px solid #5d00ff;
+        border-radius: 20px;
+        border-bottom-left-radius: 0;
+        margin-top: 60px;
+        font-size: 20px;
+      }
+
+      button {
+        padding: 10px 30px;
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        margin-top: 20px;
+        cursor: pointer;
+        background-color: #5d00ff;
+        color: aliceblue;
+        font-size: 20px;
+        font-weight: 900;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>متن به صدا</h1>
+      <textarea
+        id="text-input"
+        placeholder="متن مورد نظر رو وارد کن ..."
+      ></textarea>
+      <button id="speak-btn">بخون</button>
+    </div>
+
+    <script>
+      const speakButton = document.getElementById("speak-btn");
+      const textInput = document.getElementById("text-input");
+      const speech = new SpeechSynthesisUtterance();
+
+      speech.voice = speechSynthesis.getVoices()[0];
+      speech.pitch = 1;
+
+      speakButton.addEventListener("click", () => {
+        speech.text = textInput.value;
+
+        speechSynthesis.speak(speech);
+      });
+    </script>
+  </body>
+</html>
